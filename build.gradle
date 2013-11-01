@@ -1,0 +1,36 @@
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+dependencies {
+  compile group: 'org.apache.hadoop', name: "hadoop-streaming", version: '1.0.3'
+  compile group: 'org.apache.hadoop', name: "hadoop-core", version: '1.0.3'
+}
+
+group = "au.com.dius"
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src/java']
+    }
+  }
+}
+
+
+task printClasspath(dependsOn: classes) << {
+  println sourceSets.main.runtimeClasspath.asPath
+}
+
+task printJirbClasspath(dependsOn: classes) << {
+  configurations.compile.each {
+    if (!it.absolutePath.endsWith(".pom")) {
+      print " -r " + it.absolutePath
+    }
+  }
+}
