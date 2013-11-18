@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
+# Hadoop word count example - streaming reducer implementation
+
 result = {}
 
 ARGF.reduce({}) do |result, line|
-	key, value = tokens = line.split("\t")
+	key, value = line.split("\t")
 	result[key] ||= 0
 	result[key] += value.to_i
 	result
