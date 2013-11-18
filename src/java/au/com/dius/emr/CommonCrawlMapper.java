@@ -1,15 +1,15 @@
 package au.com.dius.emr;
 
-import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class CommonCrawlMapper extends Mapper<Text, Text, Text, LongWritable> {
+public class CommonCrawlMapper extends Mapper<Text, Text, Text, IntWritable> {
 
-  private final static LongWritable one = new LongWritable(1);
+  private final static IntWritable one = new IntWritable(1);
 
   private String[] targetWords;
   private Text word = new Text();
